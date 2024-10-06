@@ -1,38 +1,41 @@
-import { useState } from 'react'
+// import { useState } from 'react'
 // import reactLogo from '../assets/react.svg'
 // import viteLogo from '/vite.svg'
-import '../styles/App.css'
-import { Resume } from './Resume'
+import "../styles/App.css";
+// import { Resume } from './Resume'
+import { FormComponent } from "./FormComponent";
+import { InputComponent } from "./InputComponent";
 
 function App() {
   // const [count, setCount] = useState(0)
 
-  return (
+  const getInputFeatures = (labelName, type, placeholder) => {
+    return { labelName, type, placeholder };
+  };
 
-    <Resume />
-    // <>
-    //   <div>
-    //     <a href="https://vitejs.dev" target="_blank">
-    //       <img src={viteLogo} className="logo" alt="Vite logo" />
-    //     </a>
-    //     <a href="https://react.dev" target="_blank">
-    //       <img src={reactLogo} className="logo react" alt="React logo" />
-    //     </a>
-    //   </div>
-    //   <h1>Vite + React</h1>
-    //   <div className="card">
-    //     <button onClick={() => setCount((count) => count + 1)}>
-    //       count is {count}
-    //     </button>
-    //     <p>
-    //       Edit <code>src/App.jsx</code> and save to test HMR
-    //     </p>
-    //   </div>
-    //   <p className="read-the-docs">
-    //     Click on the Vite and React logos to learn more
-    //   </p>
-    // </>
-  )
+  // console.log(getInputFeatures("Email", "text", "Yuh is my driver"));
+
+  const personalDetailsFormFeatures = [
+    getInputFeatures("Full Name", "text", "First and last name"),
+    getInputFeatures("Email", "email", "Enter email"),
+    getInputFeatures("Phone number", "tel", "Enter phone number"),
+    getInputFeatures("Address", "text", "Enter address"),
+  ];
+
+  console.log(personalDetailsFormFeatures);
+
+  const inputArray = personalDetailsFormFeatures.map((item, index) => {
+    return (
+      <InputComponent
+        key={index}
+        labelName={item.labelName}
+        type={item.type}
+        placeholder={item.placeholder}
+      />
+    );
+  });
+
+  return <FormComponent title={"Personal Details"}>{inputArray}</FormComponent>;
 }
 
-export default App
+export default App;
