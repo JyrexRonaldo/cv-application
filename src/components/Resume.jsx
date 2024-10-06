@@ -1,6 +1,6 @@
-import phoneIcon from "../../public/phone.svg";
-import emailIcon from "../../public/email.svg";
-import mapMarkerIcon from "../../public/map-marker.svg";
+import phoneIcon from "/phone.svg";
+import emailIcon from "/email.svg";
+import mapMarkerIcon from "/map-marker.svg";
 import "../styles/Resume.css";
 
 function Resume() {
