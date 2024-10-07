@@ -1,13 +1,14 @@
 import "../styles/InputComponent.css";
 
-function InputComponent({ labelName, type, placeholder }) {
+function InputComponent({ labelName, type, placeholder, handlerFunction }) {
   return (
     <>
-      <label>
-        {labelName}
-        <input type={type} placeholder={placeholder} />
-      </label>
-      <br />
+      <div>
+          <label>
+            {labelName}
+            <input type={type} placeholder={placeholder} onChange={handlerFunction}/>
+          </label>
+      </div>
     </>
   );
 }
