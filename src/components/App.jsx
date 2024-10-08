@@ -8,8 +8,7 @@ import { InputComponent } from "./InputComponent";
 import { useState } from "react";
 
 function App() {
-  // const [count, setCount] = useState(0)
-
+  
   const [personalDetailsInfo, setPersonalDetailsInfo] = useState({
     name: "",
     email: "",
@@ -36,15 +35,6 @@ function App() {
     setPersonalDetailsInfo({ ...personalDetailsInfo, address: e.target.value });
   };
 
-  const getInputAttributes = (
-    labelName,
-    type,
-    placeholder,
-    value,
-    handlerFunction
-  ) => {
-    return { labelName, type, placeholder, value, handlerFunction };
-  };
 
   const [educationInfo, setEducationInfo] = useState({
     placeOfStudy: "",
@@ -84,6 +74,18 @@ function App() {
     setEducationInfo({ ...educationInfo, location: e.target.value });
   };
 
+  const [educationArray, setEducationArray] = useState([]);
+
+  const handleEducationSubmit = () => {
+    for (const key in educationInfo) {
+      if (educationInfo[key].trim() === "") {
+        return;
+      }
+    }
+    setEducationArray([...educationArray, educationInfo]);
+    resetEducationInfo();
+  };
+
   const [experienceInfo, setExperienceInfo] = useState({
     companyName: "",
     positionTitle: "",
@@ -93,7 +95,6 @@ function App() {
     description: "",
   });
 
-
   const resetExperienceInfo = () => {
     setExperienceInfo({
       companyName: "",
@@ -102,8 +103,8 @@ function App() {
       endDate: "",
       location: "",
       description: "",
-    })
-  }
+    });
+  };
 
   const handleCompanyNameChange = (e) => {
     setExperienceInfo({ ...experienceInfo, companyName: e.target.value });
@@ -129,38 +130,17 @@ function App() {
     setExperienceInfo({ ...experienceInfo, description: e.target.value });
   };
 
-  const [educationArray, setEducationArray] = useState([]);
-
-  const handleEducationSubmit = () => {
-    console.log("hi");
-    for (const key in educationInfo) {
-      if (educationInfo[key].trim() === "") {
-        return;
-      }
-    }
-
-    setEducationArray([...educationArray, educationInfo]);
-    resetEducationInfo();
-
-    console.log(educationArray);
-  };
-
-  const [experienceArray, setExperienceArray] = useState([])
+  const [experienceArray, setExperienceArray] = useState([]);
 
   const handleExperienceSubmit = () => {
     for (const key in experienceInfo) {
       if (experienceInfo[key].trim() === "") {
-        return
+        return;
       }
     }
-
-    setExperienceArray([...experienceArray, experienceInfo])
-    resetExperienceInfo()
-
-    console.log(experienceArray)
-  }
-
-  // console.log(getInputAttributes("Email", "text", "Yuh is my driver"));
+    setExperienceArray([...experienceArray, experienceInfo]);
+    resetExperienceInfo();
+  };
 
   const personalDetailsFormAttributes = [
     getInputAttributes(
@@ -178,6 +158,16 @@ function App() {
     ),
     getInputAttributes("Address", "text", "Enter address", handleAddressChange),
   ];
+
+  const getInputAttributes = (
+    labelName,
+    type,
+    placeholder,
+    value,
+    handlerFunction
+  ) => {
+    return { labelName, type, placeholder, value, handlerFunction };
+  };
 
   const educationFormAttributes = [
     getInputAttributes(
@@ -284,12 +274,6 @@ function App() {
 
   const experienceInputsArray = getInputComponents(experienceFormAttributes);
 
-  console.log(personalDetailsInfo);
-
-  console.log(educationArray);
-
-  console.log(experienceArray);
-
   return (
     <>
       <FormComponent title={"Personal Details"}>
@@ -303,12 +287,14 @@ function App() {
       </FormComponent>
       <FormComponent title={"Experience"}>
         {experienceInputsArray}
-        <button type="button" onClick={handleExperienceSubmit}>+ EXPERIENCE</button>
+        <button type="button" onClick={handleExperienceSubmit}>
+          + EXPERIENCE
+        </button>
       </FormComponent>
       <Resume
         personalDetailsObject={personalDetailsInfo}
-        educationObject={educationInfo}
-        experienceObject={experienceInfo}
+        educationObject={educationArray}
+        experienceObject={experienceArray}
       />
     </>
   );

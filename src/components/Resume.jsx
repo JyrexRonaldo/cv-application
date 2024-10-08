@@ -5,9 +5,42 @@ import "../styles/Resume.css";
 
 function Resume({personalDetailsObject, educationObject, experienceObject}) {
 
-    console.log(personalDetailsObject)
-    console.log(educationObject)
-    console.log(experienceObject)
+    const educationStructure = educationObject.map((item, index) => {
+        return (
+            <li key={index}>
+              <div>
+                <div>
+                  <p>{item.startDate} – {item.endDate}</p>
+                  <p>{item.location}</p>
+                </div>
+                <div>
+                  <h3>{item.placeOfStudy}</h3>
+                  <p>{item.degree}</p>
+                </div>
+              </div>
+            </li>
+        )
+    })
+
+    const experienceStructure = experienceObject.map((item, index) => {
+        return (
+            <li key={index}>
+              <div>
+                <div>
+                  <p>{item.startDate} – {item.endDate}</p>
+                  <p>{item.location}</p>
+                </div>
+                <div>
+                  <h3>{item.companyName}</h3>
+                  <p>{item.positionTitle}</p>
+                  <p>{item.description}</p>
+                </div>
+              </div>
+            </li>
+        )
+    })
+
+
   return (
     <>
       <div>
@@ -32,18 +65,7 @@ function Resume({personalDetailsObject, educationObject, experienceObject}) {
         <h2>Education</h2>
         <div>
           <ul>
-            <li>
-              <div>
-                <div>
-                  <p>{educationObject.startDate} – {educationObject.endDate}</p>
-                  <p>{educationObject.location}</p>
-                </div>
-                <div>
-                  <h3>{educationObject.placeOfStudy}</h3>
-                  <p>{educationObject.degree}</p>
-                </div>
-              </div>
-            </li>
+            {educationStructure}
           </ul>
         </div>
       </div>
@@ -51,19 +73,7 @@ function Resume({personalDetailsObject, educationObject, experienceObject}) {
         <h2>Professional Experience</h2>
         <div>
           <ul>
-            <li>
-              <div>
-                <div>
-                  <p>{experienceObject.startDate} – {experienceObject.endDate}</p>
-                  <p>{experienceObject.location}</p>
-                </div>
-                <div>
-                  <h3>{experienceObject.companyName}</h3>
-                  <p>{experienceObject.positionTitle}</p>
-                  <p>{experienceObject.description}</p>
-                </div>
-              </div>
-            </li>
+            {experienceStructure}
           </ul>
         </div>
       </div>
