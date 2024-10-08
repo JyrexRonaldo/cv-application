@@ -93,6 +93,18 @@ function App() {
     description: "",
   });
 
+
+  const resetExperienceInfo = () => {
+    setExperienceInfo({
+      companyName: "",
+      positionTitle: "",
+      startDate: "",
+      endDate: "",
+      location: "",
+      description: "",
+    })
+  }
+
   const handleCompanyNameChange = (e) => {
     setExperienceInfo({ ...experienceInfo, companyName: e.target.value });
   };
@@ -132,6 +144,21 @@ function App() {
 
     console.log(educationArray);
   };
+
+  const [experienceArray, setExperienceArray] = useState([])
+
+  const handleExperienceSubmit = () => {
+    for (const key in experienceInfo) {
+      if (experienceInfo[key].trim() === "") {
+        return
+      }
+    }
+
+    setExperienceArray([...experienceArray, experienceInfo])
+    resetExperienceInfo()
+
+    console.log(experienceArray)
+  }
 
   // console.log(getInputAttributes("Email", "text", "Yuh is my driver"));
 
@@ -195,36 +222,42 @@ function App() {
       "Company Name",
       "text",
       "Enter company name",
+      experienceInfo.companyName,
       handleCompanyNameChange
     ),
     getInputAttributes(
       "Position Title",
       "text",
       "Enter position title",
+      experienceInfo.positionTitle,
       handlePositionTitleChange
     ),
     getInputAttributes(
       "Start Date",
       "date",
       "mm/dd/yyyy",
+      experienceInfo.startDate,
       handleStartDateCompanyChange
     ),
     getInputAttributes(
       "End Date",
       "date",
       "mm/dd/yyyy",
+      experienceInfo.endDate,
       handleEndDateCompanyChange
     ),
     getInputAttributes(
       "Location",
       "text",
       "Enter location",
+      experienceInfo.location,
       handleCompanyLocationChange
     ),
     getInputAttributes(
       "Description",
       "text",
       "Enter description",
+      experienceInfo.description,
       handleRoleDescriptionChange
     ),
   ];
@@ -253,6 +286,10 @@ function App() {
 
   console.log(personalDetailsInfo);
 
+  console.log(educationArray);
+
+  console.log(experienceArray);
+
   return (
     <>
       <FormComponent title={"Personal Details"}>
@@ -266,7 +303,7 @@ function App() {
       </FormComponent>
       <FormComponent title={"Experience"}>
         {experienceInputsArray}
-        {/* <button>+ EXPERIENCE</button> */}
+        <button type="button" onClick={handleExperienceSubmit}>+ EXPERIENCE</button>
       </FormComponent>
       <Resume
         personalDetailsObject={personalDetailsInfo}
