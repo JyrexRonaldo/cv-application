@@ -2,7 +2,7 @@
 // import reactLogo from '../assets/react.svg'
 // import viteLogo from '/vite.svg'
 import "../styles/App.css";
-import { Resume } from './Resume'
+import { Resume } from "./Resume";
 import { FormComponent } from "./FormComponent";
 import { InputComponent } from "./InputComponent";
 import { useState } from "react";
@@ -10,110 +10,224 @@ import { useState } from "react";
 function App() {
   // const [count, setCount] = useState(0)
 
-  const [personalDetailsInfo, setPersonalDetailsInfo] = useState({name: "", email: "", phoneNumber: "", address: ""}) 
+  const [personalDetailsInfo, setPersonalDetailsInfo] = useState({
+    name: "",
+    email: "",
+    phoneNumber: "",
+    address: "",
+  });
 
   const handleNameChange = (e) => {
-    setPersonalDetailsInfo({...personalDetailsInfo, name: e.target.value })
-  }
-  
-  const handleEmailChange = (e) => {
-    setPersonalDetailsInfo({...personalDetailsInfo, email: e.target.value })
-  }
-  
-  const handlePhoneNumberChange = (e) => {
-    setPersonalDetailsInfo({...personalDetailsInfo, phoneNumber: e.target.value })
-  }
-  
-  const handleAddressChange = (e) => {
-    setPersonalDetailsInfo({...personalDetailsInfo, address: e.target.value })
-  }
-  
-  const getInputFeatures = (labelName, type, placeholder, handlerFunction) => {
-    return { labelName, type, placeholder, handlerFunction };
+    setPersonalDetailsInfo({ ...personalDetailsInfo, name: e.target.value });
   };
 
-  const [educationInfo, setEducationInfo] = useState({placeOfStudy: "", degree: "", startDate: "", endDate: "", location: ""})
+  const handleEmailChange = (e) => {
+    setPersonalDetailsInfo({ ...personalDetailsInfo, email: e.target.value });
+  };
+
+  const handlePhoneNumberChange = (e) => {
+    setPersonalDetailsInfo({
+      ...personalDetailsInfo,
+      phoneNumber: e.target.value,
+    });
+  };
+
+  const handleAddressChange = (e) => {
+    setPersonalDetailsInfo({ ...personalDetailsInfo, address: e.target.value });
+  };
+
+  const getInputAttributes = (
+    labelName,
+    type,
+    placeholder,
+    value,
+    handlerFunction
+  ) => {
+    return { labelName, type, placeholder, value, handlerFunction };
+  };
+
+  const [educationInfo, setEducationInfo] = useState({
+    placeOfStudy: "",
+    degree: "",
+    startDate: "",
+    endDate: "",
+    location: "",
+  });
+
+  const resetEducationInfo = () => {
+    setEducationInfo({
+      placeOfStudy: "",
+      degree: "",
+      startDate: "",
+      endDate: "",
+      location: "",
+    });
+  };
 
   const handlePlaceChange = (e) => {
-        setEducationInfo({...educationInfo, placeOfStudy: e.target.value})    
-  }
+    setEducationInfo({ ...educationInfo, placeOfStudy: e.target.value });
+  };
 
   const handleDegreeChange = (e) => {
-    setEducationInfo({...educationInfo, degree: e.target.value})    
-}
+    setEducationInfo({ ...educationInfo, degree: e.target.value });
+  };
 
-const handleStartDateChange = (e) => {
-  setEducationInfo({...educationInfo, startDate: e.target.value})    
-}
+  const handleStartDateChange = (e) => {
+    setEducationInfo({ ...educationInfo, startDate: e.target.value });
+  };
 
-const handleEndDateChange = (e) => {
-  setEducationInfo({...educationInfo, endDate: e.target.value})    
-}
+  const handleEndDateChange = (e) => {
+    setEducationInfo({ ...educationInfo, endDate: e.target.value });
+  };
 
-const handleLocationChange = (e) => {
-  setEducationInfo({...educationInfo, location: e.target.value})    
-}
+  const handleLocationChange = (e) => {
+    setEducationInfo({ ...educationInfo, location: e.target.value });
+  };
 
-
-const [experienceInfo, setExperienceInfo] = useState({companyName: "", positionTitle: "", startDate: "", endDate: "", location: "", description: ""})
+  const [experienceInfo, setExperienceInfo] = useState({
+    companyName: "",
+    positionTitle: "",
+    startDate: "",
+    endDate: "",
+    location: "",
+    description: "",
+  });
 
   const handleCompanyNameChange = (e) => {
-        setExperienceInfo({...experienceInfo, companyName: e.target.value})    
-  }
+    setExperienceInfo({ ...experienceInfo, companyName: e.target.value });
+  };
 
   const handlePositionTitleChange = (e) => {
-    setExperienceInfo({...experienceInfo, positionTitle: e.target.value})    
-}
+    setExperienceInfo({ ...experienceInfo, positionTitle: e.target.value });
+  };
 
-const handleStartDateCompanyChange = (e) => {
-  setExperienceInfo({...experienceInfo, startDate: e.target.value})    
-}
+  const handleStartDateCompanyChange = (e) => {
+    setExperienceInfo({ ...experienceInfo, startDate: e.target.value });
+  };
 
-const handleEndDateCompanyChange = (e) => {
-  setExperienceInfo({...experienceInfo, endDate: e.target.value})    
-}
+  const handleEndDateCompanyChange = (e) => {
+    setExperienceInfo({ ...experienceInfo, endDate: e.target.value });
+  };
 
-const handleCompanyLocationChange = (e) => {
-  setExperienceInfo({...experienceInfo, location: e.target.value})    
-}
+  const handleCompanyLocationChange = (e) => {
+    setExperienceInfo({ ...experienceInfo, location: e.target.value });
+  };
 
-const handleRoleDescriptionChange = (e) => {
-  setExperienceInfo({...experienceInfo, description: e.target.value})    
-}
+  const handleRoleDescriptionChange = (e) => {
+    setExperienceInfo({ ...experienceInfo, description: e.target.value });
+  };
 
+  const [educationArray, setEducationArray] = useState([]);
 
+  const handleEducationSubmit = () => {
+    console.log("hi");
+    for (const key in educationInfo) {
+      if (educationInfo[key].trim() === "") {
+        return;
+      }
+    }
 
-  
+    setEducationArray([...educationArray, educationInfo]);
+    resetEducationInfo();
 
+    console.log(educationArray);
+  };
 
+  // console.log(getInputAttributes("Email", "text", "Yuh is my driver"));
 
-  // console.log(getInputFeatures("Email", "text", "Yuh is my driver"));
-
-  const personalDetailsFormFeatures = [
-    getInputFeatures("Full Name", "text", "First and last name", handleNameChange),
-    getInputFeatures("Email", "email", "Enter email", handleEmailChange),
-    getInputFeatures("Phone number", "tel", "Enter phone number", handlePhoneNumberChange),
-    getInputFeatures("Address", "text", "Enter address", handleAddressChange),
+  const personalDetailsFormAttributes = [
+    getInputAttributes(
+      "Full Name",
+      "text",
+      "First and last name",
+      handleNameChange
+    ),
+    getInputAttributes("Email", "email", "Enter email", handleEmailChange),
+    getInputAttributes(
+      "Phone number",
+      "tel",
+      "Enter phone number",
+      handlePhoneNumberChange
+    ),
+    getInputAttributes("Address", "text", "Enter address", handleAddressChange),
   ];
 
-  const educationFormFeatures = [
-    getInputFeatures("Place of study", "text", "Enter place of study", handlePlaceChange),
-    getInputFeatures("Degree", "text", "Enter degree", handleDegreeChange),
-    getInputFeatures("Start Date", "date", "mm/dd/yyyy", handleStartDateChange),
-    getInputFeatures("End Date", "date", "mm/dd/yyyy", handleEndDateChange),
-    getInputFeatures("Location", "text", "Enter location", handleLocationChange),
+  const educationFormAttributes = [
+    getInputAttributes(
+      "Place of study",
+      "text",
+      "Enter place of study",
+      educationInfo.placeOfStudy,
+      handlePlaceChange
+    ),
+    getInputAttributes(
+      "Degree",
+      "text",
+      "Enter degree",
+      educationInfo.degree,
+      handleDegreeChange
+    ),
+    getInputAttributes(
+      "Start Date",
+      "date",
+      "mm/dd/yyyy",
+      educationInfo.startDate,
+      handleStartDateChange
+    ),
+    getInputAttributes(
+      "End Date",
+      "date",
+      "mm/dd/yyyy",
+      educationInfo.endDate,
+      handleEndDateChange
+    ),
+    getInputAttributes(
+      "Location",
+      "text",
+      "Enter location",
+      educationInfo.location,
+      handleLocationChange
+    ),
   ];
 
-  const experienceFormFeatures = [
-    getInputFeatures("Company Name", "text", "Enter company name", handleCompanyNameChange),
-    getInputFeatures("Position Title", "text", "Enter position title", handlePositionTitleChange),
-    getInputFeatures("Start Date", "date", "mm/dd/yyyy", handleStartDateCompanyChange),
-    getInputFeatures("End Date", "date", "mm/dd/yyyy", handleEndDateCompanyChange),
-    getInputFeatures("Location", "text", "Enter location", handleCompanyLocationChange),
-    getInputFeatures("Description", "text", "Enter description", handleRoleDescriptionChange),
-  ]
-
-  
+  const experienceFormAttributes = [
+    getInputAttributes(
+      "Company Name",
+      "text",
+      "Enter company name",
+      handleCompanyNameChange
+    ),
+    getInputAttributes(
+      "Position Title",
+      "text",
+      "Enter position title",
+      handlePositionTitleChange
+    ),
+    getInputAttributes(
+      "Start Date",
+      "date",
+      "mm/dd/yyyy",
+      handleStartDateCompanyChange
+    ),
+    getInputAttributes(
+      "End Date",
+      "date",
+      "mm/dd/yyyy",
+      handleEndDateCompanyChange
+    ),
+    getInputAttributes(
+      "Location",
+      "text",
+      "Enter location",
+      handleCompanyLocationChange
+    ),
+    getInputAttributes(
+      "Description",
+      "text",
+      "Enter description",
+      handleRoleDescriptionChange
+    ),
+  ];
 
   function getInputComponents(featuresArray) {
     const componentsArray = featuresArray.map((item, index) => {
@@ -123,6 +237,7 @@ const handleRoleDescriptionChange = (e) => {
           labelName={item.labelName}
           type={item.type}
           placeholder={item.placeholder}
+          value={item.value}
           handlerFunction={item.handlerFunction}
         />
       );
@@ -130,12 +245,11 @@ const handleRoleDescriptionChange = (e) => {
     return componentsArray;
   }
 
-  const personalInputsArray = getInputComponents(personalDetailsFormFeatures);
+  const personalInputsArray = getInputComponents(personalDetailsFormAttributes);
 
-  const educationalInputsArray = getInputComponents(educationFormFeatures);
+  const educationalInputsArray = getInputComponents(educationFormAttributes);
 
-  const experienceInputsArray = getInputComponents(experienceFormFeatures)
-
+  const experienceInputsArray = getInputComponents(experienceFormAttributes);
 
   console.log(personalDetailsInfo);
 
@@ -146,13 +260,19 @@ const handleRoleDescriptionChange = (e) => {
       </FormComponent>
       <FormComponent title={"Education"}>
         {educationalInputsArray}
-        {/* <button>+ EDUCATION</button> */}
+        <button type="button" onClick={handleEducationSubmit}>
+          + EDUCATION
+        </button>
       </FormComponent>
       <FormComponent title={"Experience"}>
         {experienceInputsArray}
         {/* <button>+ EXPERIENCE</button> */}
       </FormComponent>
-      <Resume personalDetailsObject={personalDetailsInfo} educationObject={educationInfo} experienceObject={experienceInfo}/>  
+      <Resume
+        personalDetailsObject={personalDetailsInfo}
+        educationObject={educationInfo}
+        experienceObject={experienceInfo}
+      />
     </>
   );
 }
