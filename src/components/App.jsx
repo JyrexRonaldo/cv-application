@@ -8,7 +8,6 @@ import { InputComponent } from "./InputComponent";
 import { useState } from "react";
 
 function App() {
-  
   const [personalDetailsInfo, setPersonalDetailsInfo] = useState({
     name: "",
     email: "",
@@ -35,13 +34,13 @@ function App() {
     setPersonalDetailsInfo({ ...personalDetailsInfo, address: e.target.value });
   };
 
-
   const [educationInfo, setEducationInfo] = useState({
     placeOfStudy: "",
     degree: "",
     startDate: "",
     endDate: "",
     location: "",
+    eduKey: self.crypto.randomUUID(),
   });
 
   const resetEducationInfo = () => {
@@ -51,6 +50,7 @@ function App() {
       startDate: "",
       endDate: "",
       location: "",
+      eduKey: self.crypto.randomUUID(),
     });
   };
 
@@ -93,6 +93,7 @@ function App() {
     endDate: "",
     location: "",
     description: "",
+    expKey: self.crypto.randomUUID(),
   });
 
   const resetExperienceInfo = () => {
@@ -103,6 +104,7 @@ function App() {
       endDate: "",
       location: "",
       description: "",
+      expKey: self.crypto.randomUUID(),
     });
   };
 
@@ -142,6 +144,16 @@ function App() {
     resetExperienceInfo();
   };
 
+  const getInputAttributes = (
+    labelName,
+    type,
+    placeholder,
+    value,
+    handlerFunction
+  ) => {
+    return { labelName, type, placeholder, value, handlerFunction };
+  };
+
   const personalDetailsFormAttributes = [
     getInputAttributes(
       "Full Name",
@@ -158,16 +170,6 @@ function App() {
     ),
     getInputAttributes("Address", "text", "Enter address", handleAddressChange),
   ];
-
-  const getInputAttributes = (
-    labelName,
-    type,
-    placeholder,
-    value,
-    handlerFunction
-  ) => {
-    return { labelName, type, placeholder, value, handlerFunction };
-  };
 
   const educationFormAttributes = [
     getInputAttributes(

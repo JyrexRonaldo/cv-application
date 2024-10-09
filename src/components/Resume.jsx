@@ -5,9 +5,9 @@ import "../styles/Resume.css";
 
 function Resume({personalDetailsObject, educationObject, experienceObject}) {
 
-    const educationStructure = educationObject.map((item, index) => {
+  const educationStructure = educationObject.map((item) => {
         return (
-            <li key={index}>
+            <li key={item.eduKey}>
               <div>
                 <div>
                   <p>{item.startDate} – {item.endDate}</p>
@@ -22,9 +22,9 @@ function Resume({personalDetailsObject, educationObject, experienceObject}) {
         )
     })
 
-    const experienceStructure = experienceObject.map((item, index) => {
+    const experienceStructure = experienceObject.map((item) => {
         return (
-            <li key={index}>
+            <li key={item.expKey}>
               <div>
                 <div>
                   <p>{item.startDate} – {item.endDate}</p>
