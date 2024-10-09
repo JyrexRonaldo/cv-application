@@ -43,6 +43,14 @@ function App() {
     eduKey: self.crypto.randomUUID(),
   });
 
+  const getUniqueEduId = () => {
+    if (eduEditState.editId !== "") {
+      return eduEditState.editId;
+    } else {
+      return self.crypto.randomUUID();
+    }
+  };
+
   const resetEducationInfo = () => {
     setEducationInfo({
       placeOfStudy: "",
@@ -50,7 +58,7 @@ function App() {
       startDate: "",
       endDate: "",
       location: "",
-      eduKey: self.crypto.randomUUID(),
+      eduKey: getUniqueEduId(),
     });
   };
 
@@ -82,7 +90,22 @@ function App() {
         return;
       }
     }
-    setEducationArray([...educationArray, educationInfo]);
+    let editedEducationArray = null;
+
+    if (eduEditState.editStatus === true) {
+      editedEducationArray = educationArray.map((item) => {
+        if (item.eduKey === eduEditState.editId) {
+          return educationInfo;
+        } else {
+          return item;
+        }
+      });
+      setEducationArray(editedEducationArray);
+      setEduEditState({ editStatus: false, editId: "" });
+    } else {
+      setEducationArray([...educationArray, educationInfo]);
+    }
+
     resetEducationInfo();
   };
 
@@ -96,6 +119,14 @@ function App() {
     expKey: self.crypto.randomUUID(),
   });
 
+  const getUniqueExpId = () => {
+    if (expEditState.editId !== "") {
+      return expEditState.editId;
+    } else {
+      return self.crypto.randomUUID();
+    }
+  };
+
   const resetExperienceInfo = () => {
     setExperienceInfo({
       companyName: "",
@@ -104,7 +135,7 @@ function App() {
       endDate: "",
       location: "",
       description: "",
-      expKey: self.crypto.randomUUID(),
+      expKey: getUniqueExpId(),
     });
   };
 
@@ -140,7 +171,22 @@ function App() {
         return;
       }
     }
-    setExperienceArray([...experienceArray, experienceInfo]);
+    let editedExperienceArray = null;
+
+    if (expEditState.editStatus === true) {
+      editedExperienceArray = experienceArray.map((item) => {
+        if (item.expKey === expEditState.editId) {
+          return experienceInfo;
+        } else {
+          return item;
+        }
+      });
+      setExperienceArray(editedExperienceArray);
+      setExpEditState({ editStatus: false, editId: "" });
+    } else {
+      setExperienceArray([...experienceArray, experienceInfo]);
+    }
+
     resetExperienceInfo();
   };
 
@@ -159,16 +205,30 @@ function App() {
       "Full Name",
       "text",
       "First and last name",
+      personalDetailsInfo.name,
       handleNameChange
     ),
-    getInputAttributes("Email", "email", "Enter email", handleEmailChange),
+    getInputAttributes(
+      "Email",
+      "email",
+      "Enter email",
+      personalDetailsInfo.email,
+      handleEmailChange
+    ),
     getInputAttributes(
       "Phone number",
       "tel",
       "Enter phone number",
+      personalDetailsInfo.phoneNumber,
       handlePhoneNumberChange
     ),
-    getInputAttributes("Address", "text", "Enter address", handleAddressChange),
+    getInputAttributes(
+      "Address",
+      "text",
+      "Enter address",
+      personalDetailsInfo.address,
+      handleAddressChange
+    ),
   ];
 
   const educationFormAttributes = [
@@ -276,6 +336,25 @@ function App() {
 
   const experienceInputsArray = getInputComponents(experienceFormAttributes);
 
+  const [eduEditState, setEduEditState] = useState({
+    editStatus: false,
+    editId: "",
+  });
+  const [expEditState, setExpEditState] = useState({
+    editStatus: false,
+    editId: "",
+  });
+
+  const handleExpEdit = (e) => {
+    const btnKey = e.target.getAttribute("data-buttonId");
+    setExpEditState({ editStatus: true, editId: btnKey });
+  };
+
+  const handleEduEdit = (e) => {
+    const btnKey = e.target.getAttribute("data-buttonId");
+    setEduEditState({ editStatus: true, editId: btnKey });
+  };
+
   return (
     <>
       <FormComponent title={"Personal Details"}>
@@ -297,6 +376,8 @@ function App() {
         personalDetailsObject={personalDetailsInfo}
         educationObject={educationArray}
         experienceObject={experienceArray}
+        eduEditHandler={handleEduEdit}
+        expEditHandler={handleExpEdit}
       />
     </>
   );
