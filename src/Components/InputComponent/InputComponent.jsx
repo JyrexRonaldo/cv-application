@@ -1,4 +1,4 @@
-import "../styles/InputComponent.css";
+import "./InputComponent.css";
 
 function InputComponent({ labelName, type, placeholder,value, handlerFunction }) {
   return (

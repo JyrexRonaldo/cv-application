@@ -1,4 +1,4 @@
-import "../styles/FormComponent.css";
+import "./FormComponent.css";
 
 function FormComponent({ title, children }) {
   return (

@@ -1,10 +1,10 @@
 // import { useState } from 'react'
 // import reactLogo from '../assets/react.svg'
 // import viteLogo from '/vite.svg'
-import "../styles/App.css";
-import { Resume } from "./Resume";
-import { FormComponent } from "./FormComponent";
-import { InputComponent } from "./InputComponent";
+import "./App.css";
+import { Resume } from "../ResumeComponent/ResumeComponent";
+import { FormComponent } from "../FormComponent/FormComponent";
+import { InputComponent } from "../InputComponent/InputComponent";
 import { useState } from "react";
 
 function App() {

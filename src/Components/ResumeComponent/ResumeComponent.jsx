@@ -1,13 +1,8 @@
 import phoneIcon from "/phone.svg";
 import emailIcon from "/email.svg";
 import mapMarkerIcon from "/map-marker.svg";
-import "../styles/Resume.css";
+import "./ResumeComponent.css";
 
-// const handleExperienceEdit = (e) => {
-//   console.log(e.target.getAttribute("data-buttonId"))
-// const btnKey = e.target.getAttribute("data-buttonId")
-
-// }
 
 function Resume({
   personalDetailsObject,
