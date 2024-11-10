@@ -1,7 +1,4 @@
-// import { useState } from 'react'
-// import reactLogo from '../assets/react.svg'
-// import viteLogo from '/vite.svg'
-import "./App.css";
+// import styles from "./App.module.css";
 import { Resume } from "../ResumeComponent/ResumeComponent";
 import { FormComponent } from "../FormComponent/FormComponent";
 import { InputComponent } from "../InputComponent/InputComponent";
@@ -356,22 +353,25 @@ function App() {
   };
 
   return (
-    <>
-      <FormComponent title={"Personal Details"}>
-        {personalInputsArray}
-      </FormComponent>
-      <FormComponent title={"Education"}>
-        {educationalInputsArray}
-        <button type="button" onClick={handleEducationSubmit}>
-          + EDUCATION
-        </button>
-      </FormComponent>
-      <FormComponent title={"Experience"}>
-        {experienceInputsArray}
-        <button type="button" onClick={handleExperienceSubmit}>
-          + EXPERIENCE
-        </button>
-      </FormComponent>
+   <>
+
+<div>
+        <FormComponent title={"Personal Details"}>
+          {personalInputsArray}
+        </FormComponent>
+        <FormComponent title={"Education"}>
+          {educationalInputsArray}
+          <button type="button" onClick={handleEducationSubmit}>
+            + EDUCATION
+          </button>
+        </FormComponent>
+        <FormComponent title={"Experience"}>
+          {experienceInputsArray}
+          <button type="button" onClick={handleExperienceSubmit}>
+            + EXPERIENCE
+          </button>
+        </FormComponent>
+      </div>
       <Resume
         personalDetailsObject={personalDetailsInfo}
         educationObject={educationArray}
@@ -379,7 +379,9 @@ function App() {
         eduEditHandler={handleEduEdit}
         expEditHandler={handleExpEdit}
       />
-    </>
+   </> 
+      
+    
   );
 }
 
