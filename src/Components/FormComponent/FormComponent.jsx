@@ -1,8 +1,8 @@
-import "./FormComponent.css";
+import styles from "./FormComponent.module.css";
 
 function FormComponent({ title, children }) {
   return (
-    <div>
+    <div className={styles.formComponent}>
       <h2>{title}</h2>
       {children}
     </div>

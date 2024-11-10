@@ -1,4 +1,4 @@
-// import styles from "./App.module.css";
+import styles from "./App.module.css";
 import { Resume } from "../ResumeComponent/ResumeComponent";
 import { FormComponent } from "../FormComponent/FormComponent";
 import { InputComponent } from "../InputComponent/InputComponent";
@@ -353,9 +353,8 @@ function App() {
   };
 
   return (
-   <>
-
-<div>
+    <main className={styles.main} >
+      <div>
         <FormComponent title={"Personal Details"}>
           {personalInputsArray}
         </FormComponent>
@@ -379,9 +378,7 @@ function App() {
         eduEditHandler={handleEduEdit}
         expEditHandler={handleExpEdit}
       />
-   </> 
-      
-    
+    </main>
   );
 }
 

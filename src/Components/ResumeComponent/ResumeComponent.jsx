@@ -1,7 +1,7 @@
 import phoneIcon from "/phone.svg";
 import emailIcon from "/email.svg";
 import mapMarkerIcon from "/map-marker.svg";
-import "./ResumeComponent.css";
+// import "./ResumeComponent.css";
 
 
 function Resume({
@@ -57,7 +57,7 @@ function Resume({
   });
 
   return (
-    <>
+    <div>
       <div>
         <h1>{personalDetailsObject.name}</h1>
         <div>
@@ -87,7 +87,7 @@ function Resume({
           <ul>{experienceStructure}</ul>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

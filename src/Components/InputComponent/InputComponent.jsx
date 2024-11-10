@@ -1,4 +1,4 @@
-import "./InputComponent.css";
+import styles from "./InputComponent.module.css";
 
 function InputComponent({
   labelName,
@@ -8,19 +8,17 @@ function InputComponent({
   handlerFunction,
 }) {
   return (
-    <>
-      <div>
+      <div className={styles.inputComponent}>
         <label>
           {labelName}
-          <input
+        </label>
+        <input
             type={type}
             placeholder={placeholder}
             value={value}
             onChange={handlerFunction}
           />
-        </label>
       </div>
-    </>
   );
 }
 
