@@ -1,8 +1,8 @@
 import phoneIcon from "/phone.svg";
 import emailIcon from "/email.svg";
 import mapMarkerIcon from "/map-marker.svg";
-// import "./ResumeComponent.css";
-
+import styles from "./ResumeComponent.module.css";
+import { Fragment } from "react";
 
 function Resume({
   personalDetailsObject,
@@ -13,52 +13,56 @@ function Resume({
 }) {
   const educationStructure = educationObject.map((item) => {
     return (
-      <li key={item.eduKey}>
-        <div>
+      <Fragment key={item.eduKey}>
+        <li>
           <div>
-            <p>
-              {item.startDate} – {item.endDate}
-            </p>
-            <p>{item.location}</p>
+            <div>
+              <h3>{item.location}</h3>
+              <p>
+                {item.startDate} – {item.endDate}
+              </p>
+            </div>
+            <div>
+              <h3 className={styles.orgName}>{item.placeOfStudy}</h3>
+              <p>{item.degree}</p>
+            </div>
           </div>
-          <div>
-            <h3>{item.placeOfStudy}</h3>
-            <p>{item.degree}</p>
-          </div>
-        </div>
-        <button data-buttonId={item.eduKey} onClick={eduEditHandler}>
+        </li>
+        <button data-buttonid={item.eduKey} onClick={eduEditHandler}>
           Edit
         </button>
-      </li>
+      </Fragment>
     );
   });
 
   const experienceStructure = experienceObject.map((item) => {
     return (
-      <li key={item.expKey}>
-        <div>
+      <Fragment key={item.expKey}>
+        <li>
           <div>
-            <p>
-              {item.startDate} – {item.endDate}
-            </p>
-            <p>{item.location}</p>
+            <div>
+              <h3>{item.location}</h3>
+              <p>
+                {item.startDate} – {item.endDate}
+              </p>
+            </div>
+            <div>
+              <h3 className={styles.orgName}>{item.companyName}</h3>
+              <p>{item.positionTitle}</p>
+              <p>{item.description}</p>
+            </div>
           </div>
-          <div>
-            <h3>{item.companyName}</h3>
-            <p>{item.positionTitle}</p>
-            <p>{item.description}</p>
-          </div>
-        </div>
-        <button data-buttonId={item.expKey} onClick={expEditHandler}>
+        </li>
+        <button data-buttonid={item.expKey} onClick={expEditHandler}>
           Edit
         </button>
-      </li>
+      </Fragment>
     );
   });
 
   return (
-    <div>
-      <div>
+    <div className={styles.sectionContainer}>
+      <div className={styles.personalDetailSection}>
         <h1>{personalDetailsObject.name}</h1>
         <div>
           <div>
@@ -75,17 +79,13 @@ function Resume({
           </div>
         </div>
       </div>
-      <div>
+      <div className={styles.educationSection}>
         <h2>Education</h2>
-        <div>
-          <ul>{educationStructure}</ul>
-        </div>
+        <ul>{educationStructure}</ul>
       </div>
-      <div>
+      <div className={styles.experienceSection}>
         <h2>Professional Experience</h2>
-        <div>
-          <ul>{experienceStructure}</ul>
-        </div>
+        <ul>{experienceStructure}</ul>
       </div>
     </div>
   );

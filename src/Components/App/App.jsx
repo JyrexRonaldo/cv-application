@@ -245,15 +245,15 @@ function App() {
     ),
     getInputAttributes(
       "Start Date",
-      "date",
-      "mm/dd/yyyy",
+      "text",
+      "mm/yyyy",
       educationInfo.startDate,
       handleStartDateChange
     ),
     getInputAttributes(
       "End Date",
-      "date",
-      "mm/dd/yyyy",
+      "text",
+      "mm/yyyy",
       educationInfo.endDate,
       handleEndDateChange
     ),
@@ -283,15 +283,15 @@ function App() {
     ),
     getInputAttributes(
       "Start Date",
-      "date",
-      "mm/dd/yyyy",
+      "text",
+      "mm/yyyy",
       experienceInfo.startDate,
       handleStartDateCompanyChange
     ),
     getInputAttributes(
       "End Date",
-      "date",
-      "mm/dd/yyyy",
+      "text",
+      "mm/yyyy",
       experienceInfo.endDate,
       handleEndDateCompanyChange
     ),
@@ -343,17 +343,17 @@ function App() {
   });
 
   const handleExpEdit = (e) => {
-    const btnKey = e.target.getAttribute("data-buttonId");
+    const btnKey = e.target.getAttribute("data-buttonid");
     setExpEditState({ editStatus: true, editId: btnKey });
   };
 
   const handleEduEdit = (e) => {
-    const btnKey = e.target.getAttribute("data-buttonId");
+    const btnKey = e.target.getAttribute("data-buttonid");
     setEduEditState({ editStatus: true, editId: btnKey });
   };
 
   return (
-    <main className={styles.main} >
+    <main className={styles.main}>
       <div>
         <FormComponent title={"Personal Details"}>
           {personalInputsArray}
